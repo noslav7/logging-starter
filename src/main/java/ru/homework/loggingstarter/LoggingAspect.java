@@ -17,7 +17,8 @@ public class LoggingAspect {
     }
 
     @Pointcut("execution(* com.example.aspect_oriented_programming.controller..*(..))")
-    public void controllerMethods() {}
+    public void controllerMethods() {
+    }
 
     @Before("controllerMethods()")
     public void logBeforeMethod(JoinPoint joinPoint) {
@@ -77,34 +78,10 @@ public class LoggingAspect {
         if (!properties.isEnabled()) return;
 
         switch (properties.getLogLevel()) {
-            case TRACE -> {
-                if (throwable != null) {
-                    logger.trace(message, throwable);
-                } else {
-                    logger.trace(message);
-                }
-            }
-            case DEBUG -> {
-                if (throwable != null) {
-                    logger.debug(message, throwable);
-                } else {
-                    logger.debug(message);
-                }
-            }
-            case INFO -> {
-                if (throwable != null) {
-                    logger.info(message, throwable);
-                } else {
-                    logger.info(message);
-                }
-            }
-            case WARN -> {
-                if (throwable != null) {
-                    logger.warn(message, throwable);
-                } else {
-                    logger.warn(message);
-                }
-            }
+            case TRACE -> logger.trace(message);
+            case DEBUG -> logger.debug(message);
+            case INFO -> logger.info(message);
+            case WARN -> logger.warn(message);
             case ERROR -> {
                 if (throwable != null) {
                     logger.error(message, throwable);
